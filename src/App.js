@@ -7,7 +7,7 @@ import Header from "./components/Header.js";
 import Navbar from "./components/Navbar.js";
 import Hero from "./components/Hero.js";
 import Explore from "./components/Explore.js"
-
+import Footer from "./components/Footer.js";
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
       <Navbar />
       <Hero/>
       <Explore/>
+      <Footer/>
     
       {/* <Main/> */}
       
