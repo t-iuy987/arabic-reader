@@ -129,7 +129,7 @@ body {
 }
 
 .hero__scroll-btn  .bi{
-  transition-delay:0.8s;
+  transition-delay:0.5s;
   animation:bounce 1s infinite alternate;
 }
 @keyframes bounce{

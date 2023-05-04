@@ -5,15 +5,18 @@ export default function Hero()
     return(
         <section className="hero">
             <div className="hero__overlay"></div>
-            <img src={require('../images/hero-img3.jpg')} className="img-fluid hero-img"/>
+            <img src={require('../images/hero-img1.jpg')} className="img-fluid hero-img"/>
 
 
 <div className="hero__content  h-100 container-custom position-relative">
     <div className="d-flex h-100 align-items-center hero__content-width">
         <div className="text-white">
-            <h1 className="fw-bold mb-4">Discover The Taste of your coffee</h1>
-            <p className="lead mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a href="#" className="mt-2 btn btn-lg btn-outline-light" role="button"> Buy Now</a>
+            <h1 className="fw-bold mb-4">Unlock the Power of Arabic Reading with our Integrated Root-Based Dictionary</h1>
+            <p className="lead mb-4">Welcome to our innovative online platform that takes Arabic reading to the next level. 
+            Say goodbye to the frustration of searching for 
+            definitions and meanings while reading, and experience a more efficient and effective way to improve your Arabic language skills. 
+            Join our community of avid readers and discover the joy of unlocking the true potential of Arabic literature.</p>
+            <a href="#" className="mt-2 btn btn-lg btn-outline-light" role="button">Join Now</a>
 
         </div>
     </div>

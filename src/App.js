@@ -6,6 +6,7 @@ import './App.css';
 import Header from "./components/Header.js";
 import Navbar from "./components/Navbar.js";
 import Hero from "./components/Hero.js";
+import Explore from "./components/Explore.js"
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Header/>
       <Navbar />
       <Hero/>
+      <Explore/>
     
       {/* <Main/> */}
       
