@@ -12,8 +12,8 @@ export default function Navbar() {
                         <img src={require('../images/about-us.jpg')} width="300" height="300" className="img-fluid" loading="lazy"/>
                     </div>
                     <div className="col-10">
-                        <h3>Amazing Flavour</h3>
-                        <p>FInd amazing flaour</p>
+                        <h3>Join Us</h3>
+                        <p>Lorem ipsum lorem ipsum</p>
                         <p>Learn more <i className="bi bi-arrow-right"></i></p>
                     </div>
                 </a>
@@ -25,8 +25,8 @@ export default function Navbar() {
                         <img src={require('../images/about-us.jpg')} width="300" height="300" className="img-fluid" loading="lazy"/>
                     </div>
                     <div className="col-10">
-                        <h3>Amazing Flavour</h3>
-                        <p>FInd amazing flaour</p>
+                        <h3>About Us</h3>
+                        <p>Lorem ipsum lorem ipsum</p>
                         <p>Learn more <i className="bi bi-arrow-right"></i></p>
                     </div>
                 </a>
@@ -38,8 +38,8 @@ export default function Navbar() {
                         <img src={require('../images/about-us.jpg')} width="300" height="300" className="img-fluid" loading="lazy"/>
                     </div>
                     <div className="col-10">
-                        <h3>Amazing Flavour</h3>
-                        <p>FInd amazing flaour</p>
+                        <h3>Contact Us</h3>
+                        <p>lorem ipsum lorem ipsum</p>
                         <p>Learn more <i className="bi bi-arrow-right"></i></p>
                     </div>
                 </a>

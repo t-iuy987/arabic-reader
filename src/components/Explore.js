@@ -17,7 +17,7 @@ export default function Explore() {
         <div className="col-12 col-sm-6 align-self-center ">
           <div className="explore__content-width ">
             <span>01</span>
-            <h1 className="h2 mb-4 ">Amazing Coffeee Falvour</h1>
+            <h1 className="h2 mb-4 ">Feature 01</h1>
             <p className="mv-4">
               Lorem ipsum dolar sit amt, lorem ipsum dolar sit amt,Lorem ipsum
               dolar sit amt,Lorem ipsum dolar sit amt,Lorem ipsum dolar sit amt,
@@ -50,7 +50,7 @@ export default function Explore() {
         <div className="col-12 col-sm-6 align-self-center ">
           <div className="explore__content-width ">
             <span>02</span>
-            <h1 className="h2 mb-4 ">Amazing Coffeee Falvour</h1>
+            <h1 className="h2 mb-4 ">Feature 02</h1>
             <p className="mv-4">
               Lorem ipsum dolar sit amt, lorem ipsum dolar sit amt,Lorem ipsum
               dolar sit amt,Lorem ipsum dolar sit amt,Lorem ipsum dolar sit amt,
