@@ -10,7 +10,7 @@ import Hero from "./components/Hero.js";
 import Explore from "./components/Explore.js"
 import Footer from "./components/Footer.js";
 import Sidebar from "./components/Sidebar.js";
-import Upload from "./pages/Upload"
+import Upload from './pages/Upload.js';
 import { BrowserRouter as Router , Routes, Route} from 'react-router-dom';
 
 
@@ -24,10 +24,14 @@ function App() {
       <Footer/> */}
     
       {/* <Main/> */}
+
       <Router>
       <Sidebar/>
       <Routes>
-        {/* <Route path='/upload' Component={Upload} props = {""}/> */}
+        {/* <Route path='/upload' Component={EpubReader} props = {""}/> */}
+        <Route path="/upload" Component={Upload}/>
+          
+        
 
       </Routes>
 
