@@ -64,9 +64,11 @@
 .side-text a:hover{
     background-color: #a18a75;
 }
-.side-text a .user
+.user
 {
     padding: 0;
+    color: white;
+    font-weight: bold;
     
     align-items: start;
 

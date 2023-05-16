@@ -1,7 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Hero()
 {
+    function openJoinPage()
+    {
+        window.open("/join")
+    }
     return(
         <section className="hero">
             <div className="hero__overlay"></div>
@@ -15,7 +20,9 @@ export default function Hero()
             <p className="lead mb-4">Welcome to our innovative online platform that takes Arabic reading to the next level. 
             Say goodbye to the frustration of searching for definitions and meanings while reading, and experience a more efficient and effective way to improve your Arabic language skills. 
             Join our community of avid readers and discover the joy of unlocking the true potential of Arabic literature.</p>
-            <a href="#" className="mt-2 btn btn-lg btn-outline-light" role="button">Join Now</a>
+            <Link to="/join">
+
+            <a href="#"  className="mt-2 btn btn-lg btn-outline-light" role="button">Join Now</a></Link>
 
         </div>
     </div>

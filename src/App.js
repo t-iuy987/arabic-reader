@@ -4,40 +4,37 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import './App.css';
 import './styles/sidebar.css'
-import Header from "./components/Header.js";
-import Navbar from "./components/Navbar.js";
-import Hero from "./components/Hero.js";
-import Explore from "./components/Explore.js"
-import Footer from "./components/Footer.js";
+
 import Sidebar from "./components/Sidebar.js";
-import Upload from './pages/Upload.js';
-import { BrowserRouter as Router , Routes, Route} from 'react-router-dom';
+import UploadBook from './components/UploadBook';
+import BookList from "./components/BookList";
+import DisplayBook from "./components/DisplayBook";
+import JoinNow from './components/JoinNow';
+import HomePage from './components/HomePage';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
+import UserHome from './components/UserHome';
 
 
 function App() {
   return (
     <div className="container p-0 g-0 ml-0 mr-0"> {/*<div className="container p-0 g-0 ml-0 mr-0"></div>*/}
-      {/* <Header/>
-      <Navbar />
-      <Hero/>
-      <Explore/>
-      <Footer/> */}
-    
-      {/* <Main/> */}
+        <Routes>
+          <Route path="/" element={<HomePage/>}/>
+          <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path="/join" element={<SignUp/>}/>
+          <Route path="/uhome" element={<UserHome/>}/>
 
-      <Router>
-      <Sidebar/>
-      <Routes>
-        {/* <Route path='/upload' Component={EpubReader} props = {""}/> */}
-        <Route path="/upload" Component={Upload}/>
+        {/* < Sidebar/> */}
+          {/* <Route path="/upload" element={<UploadBook />} />
+          <Route path="/booksList" element={<BookList />} />
+          <Route path="/displayBook/:id" element={<DisplayBook />} /> */}
           
-        
-
-      </Routes>
-
-
-      </Router>
+        </Routes>
       
+
     </div>
   );
 }

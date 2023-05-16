@@ -55,11 +55,11 @@
 import React, { useState } from 'react'
 import { ReactReader } from 'react-reader'
 import book from '../ai.epub';
-
-const Upload = () => {
+import axios from 'axios';
+function Upload(){
 
   // And your own state logic to persist state
-  const [location, setLocation] = useState(null)
+  const [location, setLocation] = useState(null);
   const locationChanged = epubcifi => {
     // epubcifi is a internal string used by epubjs to point to a location in an epub. It looks like this: epubcfi(/6/6[titlepage]!/4/2/12[pgepubid00003]/3:0)
     setLocation(epubcifi)
@@ -84,18 +84,38 @@ const Upload = () => {
     reader.readAsDataURL(file);
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(`Form submitted:`);
+
+
+
+   
+
+}
+
   return (
+    <>
+    <h1>Upload Book</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+          <div class="custom-file mb-3">
+            <input type="file" name="file" id="file" class="custom-file-input"/>
+            <label for="file" class="custom-file-label">Choose File</label>
+          </div>
+          <input type="submit" value="Submit" class="btn btn-primary btn-block"/>
+        </form>
+        </>
     
-    <div style={{ height: '100vh' }}>
-      {/* <input type="file" accept=".epub" onChange={handleFileUpload} />
-      {bookUrl && <ReactReader locationChanged={locationChanged}  url={bookUrl}  />} */}
-      <ReactReader
-        location={location}
-        locationChanged={locationChanged}
-        url={book}
-      />
-     
-    </div>
+    // <div style={{ height: '100vh' }}>
+    //   {/* <input type="file" accept=".epub" onChange={handleFileUpload} />
+    //   {bookUrl && <ReactReader locationChanged={locationChanged}  url={bookUrl}  />} */}
+    //   <ReactReader
+    //     location={location}
+    //     locationChanged={locationChanged}
+    //     url={book}
+    //   />
+    // </div>
   )
 }
 
