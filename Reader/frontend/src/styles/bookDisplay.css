@@ -1,5 +1,13 @@
 
 .sidebar{
-
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
     background-color: white;
+    font-family: "Courier New", monospace;
+    line-height: 1.5;
+    white-space: pre-wrap; /* Preserve line breaks */
+    
 }

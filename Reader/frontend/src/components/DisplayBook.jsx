@@ -6,9 +6,22 @@ import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import TextSelectionMenu from './TextSelectionMenu';
 
 const styles = {
-  backgroundColor: 'white',
+  backgroundColor: 'white', // White background
   padding: '20px',
   border: '1px solid #ccc',
+  width: '80%',
+  margin: '0 auto',
+  fontFamily: 'Arial, sans-serif', // Use a suitable Arabic font-family
+  direction: 'rtl', // Set text direction to right-to-left
+  lineHeight: '1.6', // Adjust line height for better readability
+  whiteSpace: 'pre-wrap', // Preserve line breaks
+  fontSize: '18px', // Adjust the font size for readability
+  color: '#333', // Dark text color
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Add a subtle shadow for depth
+  borderRadius: '5px', // Rounded corners
+  textAlign: 'justify', // Align text to justify for a neater look
+  margin: '20px auto', // Add margin for better spacing
+  padding: '30px', // Increase padding for readability
 };
 
 function DisplayBook() {
@@ -19,7 +32,6 @@ function DisplayBook() {
   const [selectedText, setSelectedText] = useState('');
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-
 
   const filepath = `http://localhost:4000/api/bookFiles/${id}`;
 
@@ -106,12 +118,12 @@ function DisplayBook() {
             }}
           />
           <TextSelectionMenu
-  show={isMenuVisible}             // Pass isMenuVisible state
-  position={menuPosition}         // Pass menuPosition state
-  onCopy={() => handleAction('copy')}     // Pass handleAction function for copy
-  onfindRoot={() => handleAction('findRoot')} // Pass handleAction function for findRoot
-  onAdd={() => handleAction('add')}       // Pass handleAction function for add
-/>
+            show={isMenuVisible}
+            position={menuPosition}
+            onCopy={() => handleAction('copy')}
+            onfindRoot={() => handleAction('findRoot')}
+            onAdd={() => handleAction('add')}
+          />
         </div>
         {showActions && (
           <div className="actions">
