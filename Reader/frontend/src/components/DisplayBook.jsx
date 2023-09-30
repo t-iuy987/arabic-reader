@@ -1,9 +1,11 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/popover.css';
 import debounce from 'lodash/debounce';
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import TextSelectionMenu from './TextSelectionMenu';
+import getWordMeaning from "../services/wordService.js"
+import WordDescriptionSidebar from './WordDescriptionSidebar';
 
 const styles = {
   backgroundColor: 'white', // White background
@@ -32,41 +34,68 @@ function DisplayBook() {
   const [selectedText, setSelectedText] = useState('');
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [description, setDescription] = useState("");
+
 
   const filepath = `http://localhost:4000/api/bookFiles/${id}`;
 
   const docs = [
     { uri: filepath },
-    // You can add more documents here if needed
+    // can aslo add more documents here if needed
   ];
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false);
+  };
 
   const handleMouseUp = (e) => {
     e.preventDefault();
     const selection = window.getSelection();
     if (selection.toString()) {
       setSelectedText(selection.toString());
-      console.log(selection.toString());
+      //console.log(selection.toString());
       setMenuPosition({ x: e.clientX, y: e.clientY });
       setIsMenuVisible(true);
     } else {
       setIsMenuVisible(false);
     }
   };
+  useEffect(() => {
+    // Use the updated selectedText here
+    console.log(selectedText);
+  }, [selectedText]);
 
-  const handleAction = (action) => {
+  const handleAction = async (action) => {
     switch (action) {
       case 'copy':
-        // Implement your copy action here
+        // Implement  copy action here
         console.log('Copy action');
         break;
       case 'findRoot':
-        // Implement your findRoot action here
+        // Implement  findRoot action here
         console.log('Find Root action');
         break;
       case 'add':
-        // Implement your add action here
+        // Implement  add action here
         console.log('Add action');
         break;
+      case 'describe':
+        try {
+          const meaning = await getWordMeaning(selectedText);
+          setIsSidebarOpen(true);
+          setDescription(meaning);
+          console.log('Description:', meaning);
+          console.log(isSidebarOpen);
+
+        } catch (error) {
+          setDescription("");
+          setIsSidebarOpen(true);
+
+          console.log("meaning not found")
+          console.error('Error fetching description:', error);
+        }; 
+        break;
+  
       default:
         break;
     }
@@ -104,7 +133,9 @@ function DisplayBook() {
 
   return (
     <div className="displayBook" style={styles}>
+
       <div>
+
         <div onMouseUp={handleMouseUp} ref={containerRef}>
           <DocViewer
             documents={docs}
@@ -123,14 +154,19 @@ function DisplayBook() {
             onCopy={() => handleAction('copy')}
             onfindRoot={() => handleAction('findRoot')}
             onAdd={() => handleAction('add')}
+            onDescribe={() => handleAction('describe')}
           />
+
         </div>
+        {isSidebarOpen && (<WordDescriptionSidebar wordDetails={description} onClose={handleCloseSidebar} />)}
+
         {showActions && (
           <div className="actions">
             <div className="word-options" style={{ top: position.y, left: position.x }}>
               <button onClick={() => handleAction('copy')}>Define</button>
               <button onClick={() => handleAction('findRoot')}>View Similar Words</button>
               <button onClick={() => handleAction('add')}>Add to Favorites</button>
+              <button onClick={() => handleAction('describe')}>Describe the word</button>
             </div>
           </div>
         )}
