@@ -4,8 +4,10 @@ import '../styles/popover.css';
 import debounce from 'lodash/debounce';
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import TextSelectionMenu from './TextSelectionMenu';
-import getWordMeaning from "../services/wordService.js"
+import {getWordMeaning, getWordsWithSameRoot, getTags} from "../services/wordService.js"
+//import WordDescription from './WordDescription';
 import WordDescriptionSidebar from './WordDescriptionSidebar';
+import DisplaySameRootedWordsSidebar from './DisplaySameRootedWordsSidebar';
 
 const styles = {
   backgroundColor: 'white', // White background
@@ -36,7 +38,8 @@ function DisplayBook() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [description, setDescription] = useState("");
-
+  const [wordList, setWordList] = useState();
+  const [isDisplayingWordsWithSameRoot, setIsDisplayingWordsWithSameRoot] = useState(false)
 
   const filepath = `http://localhost:4000/api/bookFiles/${id}`;
 
@@ -67,13 +70,31 @@ function DisplayBook() {
 
   const handleAction = async (action) => {
     switch (action) {
-      case 'copy':
-        // Implement  copy action here
+      case 'getPOS':
+        // Implement  get parts of speech action
         console.log('Copy action');
         break;
       case 'findRoot':
-        // Implement  findRoot action here
-        console.log('Find Root action');
+        // Implementing  findRoot action
+        try {
+          console.log("findroot")
+          const words = await getWordsWithSameRoot(selectedText);
+          setIsSidebarOpen(true);
+          setIsDisplayingWordsWithSameRoot(true);
+          setWordList(words);
+          console.log('Description:', wordList);
+          console.log(isSidebarOpen);
+          console.log(isDisplayingWordsWithSameRoot);
+
+        } catch (error) {
+          setDescription("");
+          setIsSidebarOpen(true);
+          setIsDisplayingWordsWithSameRoot(true);
+
+
+          console.log("meaning not found")
+          console.error('Error fetching description:', error);
+        };
         break;
       case 'add':
         // Implement  add action here
@@ -83,6 +104,7 @@ function DisplayBook() {
         try {
           const meaning = await getWordMeaning(selectedText);
           setIsSidebarOpen(true);
+          setIsDisplayingWordsWithSameRoot(false);
           setDescription(meaning);
           console.log('Description:', meaning);
           console.log(isSidebarOpen);
@@ -159,11 +181,12 @@ function DisplayBook() {
 
         </div>
         {isSidebarOpen && (<WordDescriptionSidebar wordDetails={description} onClose={handleCloseSidebar} />)}
+        {isSidebarOpen && isDisplayingWordsWithSameRoot && (<DisplaySameRootedWordsSidebar wordDetail={wordList} onClose={handleCloseSidebar} />)}
 
         {showActions && (
           <div className="actions">
             <div className="word-options" style={{ top: position.y, left: position.x }}>
-              <button onClick={() => handleAction('copy')}>Define</button>
+              <button onClick={() => handleAction('getPOS')}>Find Parts of Speech</button>
               <button onClick={() => handleAction('findRoot')}>View Similar Words</button>
               <button onClick={() => handleAction('add')}>Add to Favorites</button>
               <button onClick={() => handleAction('describe')}>Describe the word</button>
