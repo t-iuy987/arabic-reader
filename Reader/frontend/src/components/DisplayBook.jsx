@@ -1,13 +1,16 @@
 import React, { useState, useRef, useCallback, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import '../styles/popover.css';
-import debounce from 'lodash/debounce';
+//import debounce from 'lodash/debounce';
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import TextSelectionMenu from './TextSelectionMenu';
-import {getWordMeaning, getWordsWithSameRoot, getTags} from "../services/wordService.js"
+import {getWordMeaning, getWordsWithSameRoot} from "../services/wordService.js"
 //import WordDescription from './WordDescription';
 import WordDescriptionSidebar from './WordDescriptionSidebar';
 import DisplaySameRootedWordsSidebar from './DisplaySameRootedWordsSidebar';
+import {getBookIdByTitle} from "../services/bookService";
+import { useBookContext } from './BookContext';
+
 
 const styles = {
   backgroundColor: 'white', // White background
@@ -28,7 +31,7 @@ const styles = {
   padding: '30px', // Increase padding for readability
 };
 
-function DisplayBook() {
+function DisplayBook(props) {
   const { id } = useParams();
   const containerRef = useRef(null);
   const [showActions, setShowActions] = useState(false);
@@ -40,7 +43,10 @@ function DisplayBook() {
   const [description, setDescription] = useState("");
   const [wordList, setWordList] = useState();
   const [isDisplayingWordsWithSameRoot, setIsDisplayingWordsWithSameRoot] = useState(false)
-
+  const [userData, setUserData] = useState("");
+  const [user, setUser] = useState("");
+  const { bookTitle } = useBookContext();
+  console.log(bookTitle);
   const filepath = `http://localhost:4000/api/bookFiles/${id}`;
 
   const docs = [
@@ -67,6 +73,39 @@ function DisplayBook() {
     // Use the updated selectedText here
     console.log(selectedText);
   }, [selectedText]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/userData", {
+      method: "POST",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        token: window.localStorage.getItem("token"),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "userData");
+
+
+        setUserData(data.data);
+        console.log("data",data);
+
+        if (data.data == "token expired") {
+          alert("Token expired login again");
+          window.localStorage.clear();
+          window.location.href = "/login";
+        }
+      });
+  }, []);
+  function getUser(){
+    const usr = userData.email;
+    setUser(usr);
+  }
 
   const handleAction = async (action) => {
     switch (action) {
@@ -96,9 +135,24 @@ function DisplayBook() {
           console.error('Error fetching description:', error);
         };
         break;
-      case 'add':
-        // Implement  add action here
-        console.log('Add action');
+      case 'addToFavorite':
+        // Implementing addToFavorite Action here
+        try {
+          console.log(bookTitle);
+          const bookId = await getBookIdByTitle(bookTitle);
+          console.log("mbnv"+bookId);
+          //getUser(); // set the user
+          // const response = await bookService.favoriteWord({
+          //   bookId,
+          //   word: selectedText,
+          // });
+          // Handle the response as needed (e.g., show a success message).
+        } catch (error) {
+          // Handle errors
+          console.log("jabdjbajs");
+        }
+       
+      
         break;
       case 'describe':
         try {
@@ -173,7 +227,7 @@ function DisplayBook() {
           <TextSelectionMenu
             show={isMenuVisible}
             position={menuPosition}
-            onCopy={() => handleAction('copy')}
+           // onCopy={() => handleAction('copy')}
             onfindRoot={() => handleAction('findRoot')}
             onAdd={() => handleAction('add')}
             onDescribe={() => handleAction('describe')}
@@ -188,7 +242,7 @@ function DisplayBook() {
             <div className="word-options" style={{ top: position.y, left: position.x }}>
               <button onClick={() => handleAction('getPOS')}>Find Parts of Speech</button>
               <button onClick={() => handleAction('findRoot')}>View Similar Words</button>
-              <button onClick={() => handleAction('add')}>Add to Favorites</button>
+              <button onClick={() => handleAction('addToFavorite')}>Add to Favorites</button>
               <button onClick={() => handleAction('describe')}>Describe the word</button>
             </div>
           </div>

@@ -9,14 +9,16 @@ const TextSelectionMenu = ({ show, position, onGetTags, onfindRoot, onAdd, onDes
     left: `${position.x}px`,
     backgroundColor: 'white',
     border: '1px solid #ccc',
+    borderRadius:'7px',
     padding: '10px',
     zIndex: 9999, // Ensure it appears above other content
   };
 
   const buttonStyle = {
-    backgroundColor: '#007bff',
+    backgroundColor: '#e0d2c0',
     color: 'white',
     border: 'none',
+    borderRadius:'7px',
     padding: '5px 10px',
     margin: '5px',
     cursor: 'pointer',

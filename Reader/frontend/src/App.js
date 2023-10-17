@@ -16,12 +16,14 @@ import {Routes, Route } from 'react-router-dom';
 import UserHome from './components/UserHome';
 import UserDetails from './components/UserDetails';
 import Logout from './components/Logout';
-import Footer from './components/Footer';
+//import Footer from './components/Footer';
+import { BookContextProvider } from './components/BookContext';
 
 
 function App() {
   return (
     <div className="container p-0 g-0 ml-0 mr-0"> {/*<div className="container p-0 g-0 ml-0 mr-0"></div>*/}
+     <BookContextProvider>
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path='/signup' element={<SignUp/>}/>
@@ -45,6 +47,7 @@ function App() {
           <Route path="/displayBook/:id" element={<DisplayBook />} /> */}
           
         </Routes>
+        </BookContextProvider>
       
 
     </div>
