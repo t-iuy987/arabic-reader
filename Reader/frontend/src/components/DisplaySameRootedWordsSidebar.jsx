@@ -14,11 +14,11 @@ const DisplaySameRootedWordsSidebar = ({ wordDetail, onClose }) => {
       ) : (
         <div>
           {wordDetail.map((item) => (
-            <div key={item.id}>
-              <h2>Word: {item.word}</h2>
-              <p>Definition: {item.definition}</p>
-              <p>Root: {item.root}</p>
-              <p>Tags: {item.tags}</p>
+            <div key={item.id} className=''>
+              <h2>لفظ: {item.word}</h2>
+              <p><b>معنی:</b> {item.definition}</p>
+              <p><b>جذر: </b>{item.root}</p>
+              {/*<p>Tags: {item.tags}</p>*/}
             </div>
           ))}
         </div>
