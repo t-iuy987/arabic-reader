@@ -25,11 +25,14 @@ export default function Login() {
       .then((data) => {
         console.log(data, "userRegister");
         if (data.status == "ok") {
-          alert("login successful");
+          //alert("login successful");
           window.localStorage.setItem("token", data.data);
           window.localStorage.setItem("loggedIn", true);
 
           window.location.href = "/udetail";
+        }
+        else{
+          alert("Please enter valid email and password.");
         }
       });
   }
