@@ -18,12 +18,12 @@ export const SidebarData = [
         path: "/booksList",
         cName: "side-text"
     },
-    {
-        title: "Favourite Words",
-        icon: <FavoriteBorderIcon/>,
-        path: "/",
-        cName: "side-text"
-    },
+    // {
+    //     title: "Favourite Words",
+    //     icon: <FavoriteBorderIcon/>,
+    //     path: "/",
+    //     cName: "side-text"
+    // },
     {
         title: "Bookmarks",
         icon: <BookmarkBorderIcon/>,
