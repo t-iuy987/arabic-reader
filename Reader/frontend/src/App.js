@@ -22,7 +22,9 @@ import Footer from './components/Footer';
 function App() {
   return (
     <div className="container p-0 g-0 ml-0 mr-0"> {/*<div className="container p-0 g-0 ml-0 mr-0"></div>*/}
-        <Routes>
+        
+    <BookContextProvider>
+    <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/login' element={<Login/>}/>
@@ -45,7 +47,7 @@ function App() {
           <Route path="/displayBook/:id" element={<DisplayBook />} /> */}
           
         </Routes>
-      
+          </BookContextProvider>
 
     </div>
   );
