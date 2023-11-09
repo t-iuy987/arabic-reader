@@ -34,7 +34,7 @@ const bookController = require("../controllers/bookController")
 
 bookRoute.post("/uploadBook",upload.single("book"), bookController.uploadBook)
 bookRoute.get("/getBooks",bookController.getBooks );
-
+bookRoute.get('/api/getBookId', bookController.getBookId);
 
 
 module.exports = bookRoute;
