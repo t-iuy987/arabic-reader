@@ -3,14 +3,15 @@ import { useState, useEffect } from 'react';
 import bookService from '../services/bookService';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
-
+import { useBookContext } from './BookContext';
 function BookList() {
     const [books, setBooks] = useState({});
     const [userData, setUserData] = useState('');
+    const { setBookTitle } = useBookContext();
     const fetchBooks = async () => {
         setBooks(await bookService.getBooks());
     }
-    useEffect(() => { // for not loading it everytime the component is rendered
+    useEffect(() => { // for not loading it everytime  the component is rendered
         fetchBooks();
         fetch("http://localhost:4000/api/getBooks", {
       method: "POST",
@@ -49,7 +50,7 @@ function BookList() {
             {books.data != undefined && books.data.data.length && (
                 <table className='table '>
                     <thead>
-                        <th scope="col">Date</th>
+                        <th scope="col">Title</th>
                         <th scope="col">Book</th>
                     </thead>
                     <tbody>
@@ -57,8 +58,12 @@ function BookList() {
                             <tr >
                                 <td>{book.title}</td>
                                 <td>
-                                    <Link to={`/displayBook/${book.book}`}>{book.book}</Link>
-                                    {/* <a href={"http://localhost:3000/api/bookFiles/" + book.book} >{book.book}</a> */}
+                                                                      
+                                    <Link to={ `/displayBook/${book.book}` }
+                                        onClick={() => setBookTitle(book.title)
+
+                                }>{book.book}
+                                    </Link>
                                 </td>
                             </tr>
                         ))}
