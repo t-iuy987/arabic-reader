@@ -83,6 +83,8 @@ function UploadBook() {
 
     const response = await bookService.create(formData);
     console.log(response);
+    // Storing bookId in local storage
+    localStorage.setItem("bookTitle", title);
     alert("Book Succesfully Uploaded!")
     event.target.reset();
   };
