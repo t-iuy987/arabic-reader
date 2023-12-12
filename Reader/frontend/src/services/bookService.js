@@ -19,27 +19,50 @@ class Book{
         const url = "http://localhost:4000/api/getBooks";
         return axios.get(url)
     }
-    favoriteWord(bookId, word) {
-    const url = `http://localhost:4000/api/favoriteWord/${bookId}`;
-    const data = { word }; // You may need to format the data as needed.
-
-    return axios.post(url, data);
-  }
-}
-
-export const getBookIdByTitle = async  (title)=> {
+    favoriteWord(filepath, word, userId) {
+      const url = `http://localhost:4000/api/addFavoriteWord`; // The backend API endpoint
+      console.log("***////:",filepath, word, userId)
+      const data = {
+        filePath: filepath,
+        word: word,
+        userId: userId
+      };
+    
+      return axios.post(url, data, {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        }
+      });
+    }
+    
+  getBookIdByTitle(title){
     const url = `http://localhost:4000/api/getBookId/${title}`;
     return axios.get(url)
-
-    // try {
-    //   const response =  axios.get(`http://localhost:4000/api/getBookId/${title}`);
-    //   if (response.data && response.data.bookId) {
-    //     return response.data.bookId;
-    //   } else {
-    //     throw new Error('Book not found');
-    //   }
-    // } catch (error) {
-    //   throw error; // Handle errors as needed
-    // }
+  }
+  // Add a method to fetch books by user in your bookService
+getBooksByUser(userId) {
+  const url = `${BASE_URL}/api/getBooksByUser`;
+  return axios.post(url, { userId });
 }
+getBooksByUser(userId) {
+  const url = `${BASE_URL}/api/getBooksByUser/${userId}`;
+  return api.get(url);
+}
+}
+
+// export const getBookIdByTitle = async  (title)=> {
+//     const url = `http://localhost:4000/api/getBookId/${title}`;
+//     return axios.get(url)
+
+//     // try {
+//     //   const response =  axios.get(`http://localhost:4000/api/getBookId/${title}`);
+//     //   if (response.data && response.data.bookId) {
+//     //     return response.data.bookId;
+//     //   } else {
+//     //     throw new Error('Book not found');
+//     //   }
+//     // } catch (error) {
+//     //   throw error; // Handle errors as needed
+//     // }
+// }
 export default new Book();

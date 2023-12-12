@@ -68,7 +68,7 @@ export default function Appbar({
     <div
       className="appbar"
       style={{
-        backgroundColor: "#7cbcd1",
+        backgroundColor: "#bf7e81",
         display: "flex",
         justifyContent: "center",
         zIndex: "1",
@@ -201,7 +201,7 @@ export default function Appbar({
           className="btn btn-link px-1"
           onClick={() => changeTheme("pink")}
         >
-          <div
+          {/*<div
             style={{
               borderRadius: "50%",
               backgroundColor: "pink",
@@ -209,7 +209,7 @@ export default function Appbar({
               width: "13px",
               border: "2px solid pink",
             }}
-          ></div>
+          ></div>*/}
         </button>
         <span
           style={{
@@ -239,7 +239,7 @@ export default function Appbar({
             style={{
               position: "relative",
               borderRadius: "50%",
-              backgroundColor: "lightblue",
+              backgroundColor: "#e0d2c0",
               height: "15px",
               width: "15px",
               border: "0.5px solid gray",
@@ -268,7 +268,7 @@ export default function Appbar({
             style={{
               position: "relative",
               borderRadius: "50%",
-              backgroundColor: "lightblue",
+              backgroundColor: "#e0d2c0",
               height: "15px",
               width: "15px",
               border: "0.5px solid gray",

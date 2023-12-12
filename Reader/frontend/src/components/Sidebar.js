@@ -15,7 +15,7 @@ export default function Sidebar({userData})
 
     return(
         <>
-        <div className="sidebar">
+        <div className="sidebar" style={{zIndex :'1000'}}>
             <Link to="#" className="menu-bars">
                 <MenuIcon onClick={showSidebar}/>
             </Link>

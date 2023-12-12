@@ -6,9 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const scrollRestoration = () => ({});
 root.render(
   
-  <BrowserRouter>
+  <BrowserRouter scrollRestoration={scrollRestoration}>
     <App />
   </BrowserRouter>
 );

@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import WordDescriptionSidebar from './WordDescriptionSidebar'; // Import the Sidebar component
+import DisplaySameRootedWordsSidebar from "./DisplaySameRootedWordsSidebar";
 
-const WordDescription = ({ wordDescript, isOpen }) => {
-  // Example word details (you can replace this with actual data)
-  const initialWordDetails = {
-    word: 'Example',
-    meaning: 'An instance illustrating a rule or method',
-    root: 'Ex',
-    tags: 'Noun, Example',
-  };
+const WordDescription = ({ wordDescript, isOpen,DisplayingWordsList  }) => {
+
 
   const [wordDetails, setWordDetails] = useState(wordDescript);
   const [isSidebarOpen, setIsSidebarOpen] = useState(isOpen);
+  const [isDisplayingWordsList, setIsDisplayingWordsWithSameRoot] = useState(DisplayingWordsList);
 
   const handleCloseSidebar = () => {
     setIsSidebarOpen(false);
@@ -26,6 +22,9 @@ const WordDescription = ({ wordDescript, isOpen }) => {
       {isSidebarOpen && (
         <WordDescriptionSidebar wordDetails={wordDescript} onClose={handleCloseSidebar} />
       )}
+      {isSidebarOpen && isDisplayingWordsList && (
+        <DisplaySameRootedWordsSidebar wordDetails={wordDescript} onClose={handleCloseSidebar} />
+        )}
     </div>
   );
 };

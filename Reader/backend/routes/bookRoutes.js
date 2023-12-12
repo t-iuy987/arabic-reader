@@ -34,7 +34,8 @@ const bookController = require("../controllers/bookController")
 
 bookRoute.post("/uploadBook",upload.single("book"), bookController.uploadBook)
 bookRoute.get("/getBooks",bookController.getBooks );
-bookRoute.get('/api/getBookId', bookController.getBookId);
+bookRoute.get('/api/getBookId/:title', bookController.getBookId);
+bookRoute.post('/addFavoriteWord', bookController.addFavoriteWord); // This should be the correct endpoint and function
 
 
 module.exports = bookRoute;

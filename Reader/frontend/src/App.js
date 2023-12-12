@@ -21,7 +21,7 @@ import { BookContextProvider } from './components/BookContext';
 function App() {
   return (
     <div className="container p-0 g-0 ml-0 mr-0"> {/*<div className="container p-0 g-0 ml-0 mr-0"></div>*/}
-     <BookContextProvider>
+<BookContextProvider>
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path='/signup' element={<SignUp/>}/>
@@ -45,8 +45,8 @@ function App() {
           <Route path="/displayBook/:id" element={<DisplayBook />} /> */}
           
         </Routes>
+
         </BookContextProvider>
-      
 
     </div>
   );
