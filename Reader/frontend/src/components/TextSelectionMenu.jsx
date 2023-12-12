@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const TextSelectionMenu = ({ show, position, onCopy, onfindRoot, onAdd, onDescribe }) => {
+const TextSelectionMenu = ({ show, position, onfindRoot, onAdd, onAddBookmark, onDescribe }) => {
   const menuStyle = {
    // display: show ? 'block' : 'none',
     position: 'absolute',
@@ -27,9 +27,9 @@ const TextSelectionMenu = ({ show, position, onCopy, onfindRoot, onAdd, onDescri
   return (
     
     <div style={menuStyle}>
-      {/*<button style={buttonStyle} onClick={onCopy}>Copy</button>*/}
       <button style={buttonStyle} onClick={onfindRoot}>Similar Words</button>
       <button style={buttonStyle} onClick={onAdd}>❤ Favorite</button>
+      <button style={buttonStyle} onClick={onAddBookmark}>Bookmark</button>
       <button style={buttonStyle} onClick={onDescribe}>Describe</button>
     </div>
     

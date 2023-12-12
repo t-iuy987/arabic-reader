@@ -7,11 +7,13 @@ import TextSelectionMenu from "./TextSelectionMenu";
 import {getWordMeaning, getWordsWithSameRoot} from "../services/wordService.js"
 import WordDescriptionSidebar from "./WordDescriptionSidebar";
 import DisplaySameRootedWordsSidebar from './DisplaySameRootedWordsSidebar.jsx';
-import MenuListComposition from "./MenuListComposition";
+//import MenuListComposition from "./MenuListComposition";
+
 import Appbar from "./AppBar";
 import SideBars from "./SideBars";
 import Sidebar from "./Sidebar";
 import TextSelector from "text-selection-react";
+import ReadingProgress from './ReadingProgress';
 
 function DisplayBook() {
   const { id } = useParams();
@@ -28,12 +30,12 @@ function DisplayBook() {
   const [isDisplayingWordsWithSameRoot, setIsDisplayingWordsWithSameRoot] = useState(false)
   const [userData, setUserData] = useState("");
   const [user, setUser] = useState("");
-
   const [sidebarContent, setSidebarContent] = useState("");
   const [theme, setTheme] = useState("white");
   // const [searchText, setSearchText] = useState("");
   const [fontSize, setFontSize] = useState(16);
   const [searchResults, setSearchResults] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
   const [isSidebarsOpen, setIsSidebarsOpen] = useState(false);
   const [showMenuTimeout, setShowMenuTimeout] = useState(null);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -191,10 +193,6 @@ function DisplayBook() {
 
   const handleAction = async (action) => {
     switch (action) {
-      case "copy":
-        // Implement  copy action here
-        console.log("Copy action");
-        break;
       case "findRoot":
         // Implementing  findRoot action
         try {
@@ -218,9 +216,23 @@ function DisplayBook() {
             action = ""
           };
         break;
-      case "add":
-        console.log("Add action");
-        break;
+
+        case "fav":
+          // Implement the add favorite action
+          break;
+
+        case "bookmark":
+         // Get the current scroll position
+         const currentPosition = window.scrollY;
+
+      // Add the bookmark to the state
+         setBookmarks((prevBookmarks) => [...prevBookmarks, currentPosition]);
+  
+      // Hide the selection menu
+        setShowActions(false);
+         break;
+   
+         
       case "describe":
         try {
           const meaning = await getWordMeaning(selectedText);
@@ -292,6 +304,7 @@ function DisplayBook() {
          // onMouseUp={handleMouseUp}
         //  ref={containerRef}
           style={{ fontSize: `${fontSize}px` }}>
+
             <DocViewer
               documents={[{ uri: `http://localhost:4000/api/bookFiles/${id}` }]}
             // pluginRenderers={DocViewerRenderers}
@@ -315,6 +328,10 @@ function DisplayBook() {
             handler: () => handleAction("fav")
           },
           {
+            text: "Bookmark",
+            handler: () => handleAction("bookmark")
+          },
+          {
             text: "Describe",
             handler: () => handleAction("describe")
           }
@@ -322,7 +339,7 @@ function DisplayBook() {
         //color={"yellow"}
         //colorText={true}
       >
-        hfhgjhfgj
+      
       </TextSelector>
 
              {/* {isMenuVisible && <TextSelectionMenu
@@ -351,6 +368,7 @@ function DisplayBook() {
           </div>
         )}*/}
         </div>
+        <ReadingProgress />
 
         {isSidebarsOpen && (
           <div
