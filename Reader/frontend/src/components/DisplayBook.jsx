@@ -21,6 +21,15 @@ import axios from "axios";
 
 import font from '../fonts/amiri_kh/Amiri-Regular-normal.js'; // The path to your font file
 
+import WordDescriptionSidebar from "./WordDescriptionSidebar";
+import DisplaySameRootedWordsSidebar from './DisplaySameRootedWordsSidebar.jsx';
+//import MenuListComposition from "./MenuListComposition";
+
+import Appbar from "./AppBar";
+import SideBars from "./SideBars";
+import Sidebar from "./Sidebar";
+import TextSelector from "text-selection-react";
+import ReadingProgress from './ReadingProgress';
 
 function DisplayBook() {
   const { id } = useParams();
@@ -43,6 +52,7 @@ function DisplayBook() {
   // const [searchText, setSearchText] = useState("");
   const [fontSize, setFontSize] = useState(16);
   const [searchResults, setSearchResults] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
   const [isSidebarsOpen, setIsSidebarsOpen] = useState(false);
   const [showMenuTimeout, setShowMenuTimeout] = useState(null);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -200,10 +210,6 @@ function DisplayBook() {
 
   const handleAction = async (action) => {
     switch (action) {
-      case "copy":
-        // Implement  copy action here
-        console.log("Copy action");
-        break;
       case "findRoot":
         // Implementing  findRoot action
         try {
@@ -372,6 +378,7 @@ function DisplayBook() {
          // onMouseUp={handleMouseUp}
         //  ref={containerRef}
           style={{ fontSize: `${fontSize}px` }}>
+
             <DocViewer
               documents={[{ uri: `http://localhost:4000/api/bookFiles/${id}` }]}
             // pluginRenderers={DocViewerRenderers}
@@ -401,12 +408,20 @@ function DisplayBook() {
           {
             text: "Glossary",
             handler: () => handleAction("glossary")
+
+          },{
+            text: "Bookmark",
+            handler: () => handleAction("bookmark")
+          },
+          {
+            text: "Describe",
+            handler: () => handleAction("describe")
           }
         ]}
         //color={"yellow"}
         //colorText={true}
       >
-        
+      
       </TextSelector>
 
              {/* {isMenuVisible && <TextSelectionMenu
@@ -439,6 +454,7 @@ function DisplayBook() {
           </div>
         )}*/}
         </div>
+        <ReadingProgress />
 
         {isSidebarsOpen && (
           <div

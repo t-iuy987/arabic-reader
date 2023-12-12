@@ -55,6 +55,30 @@ const addFavoriteWord = async (req, res) => {
 };
 
 
+
+
+const favoriteWord = async (req, res) => {
+  try {
+    const { bookId, word } = req.body;
+
+    // Find the book by ID
+    const book = await Book.findById(bookId);
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    // Add the selected word to the favoriteWords array
+    book.favouriteWords.push(word);
+
+    // Save the updated book
+    await book.save();
+
+    return res.status(200).json({ message: "Word favorited successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
 const getBookId = async (req, res) => {
     const bookTitle = req.query.title; // Assuming you pass the book title as a query parameter
   
@@ -74,7 +98,6 @@ const getBookId = async (req, res) => {
 module.exports = {
     uploadBook,
     getBooks,
-    getBookId,
-    addFavoriteWord,
-    getBooksByUser
+    favoriteWord,
+    getBookId
 }

@@ -40,4 +40,3 @@ bookRoute.post('/addFavoriteWord', bookController.addFavoriteWord); // This shou
 
 module.exports = bookRoute;
 
-

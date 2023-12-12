@@ -37,6 +37,9 @@ export const getTags = async (word) => {
     console.error('API error:', error);
     throw error; // errors
   }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> c31f297834511bbe8ae78c816353583dec107ddd
 };
