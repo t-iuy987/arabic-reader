@@ -9,11 +9,7 @@ import bookService from '../services/bookService';
 import WordDescriptionSidebar from "./WordDescriptionSidebar";
 import DisplaySameRootedWordsSidebar from './DisplaySameRootedWordsSidebar.jsx';
 import MenuListComposition from "./MenuListComposition";
-import Appbar from "./AppBar";
-import SideBars from "./SideBars";
-import Sidebar from "./Sidebar";
 import PDFDownloader from "./PDFDownloader.jsx";
-import TextSelector from "text-selection-react";
 import jwtDecode from 'jwt-decode';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
@@ -21,8 +17,6 @@ import axios from "axios";
 
 import font from '../fonts/amiri_kh/Amiri-Regular-normal.js'; // The path to your font file
 
-import WordDescriptionSidebar from "./WordDescriptionSidebar";
-import DisplaySameRootedWordsSidebar from './DisplaySameRootedWordsSidebar.jsx';
 //import MenuListComposition from "./MenuListComposition";
 
 import Appbar from "./AppBar";
