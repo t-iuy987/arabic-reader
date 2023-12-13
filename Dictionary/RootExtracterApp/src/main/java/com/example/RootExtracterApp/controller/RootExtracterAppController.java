@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 import com.example.RootExtracterApp.model.RootExtracter;
+import com.example.RootExtracterApp.model.Word;
 import com.example.RootExtracterApp.model.WordRoots;
 import com.example.RootExtracterApp.service.RootExtracterService;
 
@@ -78,6 +79,10 @@ public class RootExtracterAppController {
 	public ModelAndView Homepage() {
 		return new ModelAndView("homepage");
 	}
+	@RequestMapping("/loginpage")
+	public ModelAndView Loginpage() {
+		return new ModelAndView("admin-login");
+	}
 
 	@RequestMapping("/uploadFile")
 	public ModelAndView uploadFile(Model model) {
@@ -92,6 +97,7 @@ public class RootExtracterAppController {
 
 		return new ModelAndView("EnterText");
 	}
+
 
 	@PostMapping("/search")
 	public ModelAndView saveTextToFile(@RequestParam("text") String text) {
@@ -237,11 +243,11 @@ public class RootExtracterAppController {
 		return new RootExtracter();
 	}
 
-	@GetMapping("/")
-	public String mainPage(Model model) {
-		return "MainRootExtracter";
-
-	}
+//	@GetMapping("/")
+//	public String mainPage(Model model) {
+//		return "MainRootExtracter";
+//
+//	}
 //	@GetMapping("/getWordMeaning")
 //	public ResponseEntity<String> getWordMeaning(@RequestParam String word) {
 //	    // Your logic to fetch the meaning from the database

@@ -3,6 +3,7 @@ package com.example.RootExtracterApp.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
@@ -11,7 +12,7 @@ import jakarta.persistence.Table;
 
 public class Word {
 	@Id
-    @GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	@Column(name = "word", columnDefinition = "nvarchar(255)", nullable = false)
 	private String word;
