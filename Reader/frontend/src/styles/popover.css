@@ -1,0 +1,96 @@
+/* Update .actions styles */
+.actions {
+  visibility: visible;
+}
+
+/* Update .word-options styles for Arabic text */
+.word-options {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  z-index: -1;
+  border-radius: 10px;
+  padding: 4px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 12px;
+  /* Adjust positioning for Arabic text */
+  top: 0;
+  right: 0;
+}
+
+.word-options button {
+  background: none;
+  color: white;
+  border: none;
+  height: 32px;
+  padding: 10px 15px 10px 15px;
+  outline: none;
+}
+
+.word-options button:hover {
+  border: 1px solid aqua; /* Adjust the border on hover */
+}
+
+/* Update .dLtxrF styles */
+.dLtxrF {
+  position: absolute;
+  right: 268px; /* Adjust positioning for Arabic text */
+  top: 271px;
+  width: 160px;
+  height: 200px;
+  box-sizing: border-box;
+  padding: 4px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 12px;
+  z-index: 10;
+}
+
+/* Update .tooltip-text styles */
+.tooltip-text {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  color: white;
+  font-size: 12px;
+  background-color: #192733;
+  border-radius: 10px;
+  padding: 10px 15px 10px 15px;
+}
+
+/* Update .hover-text styles */
+.hover-text::selection .tooltip-text {
+  visibility: visible;
+}
+
+.hover-text {
+  position: relative;
+  display: inline-block;
+  margin: 40px;
+  font-family: Arial;
+  text-align: center;
+}
+
+/* Add custom styles for Arabic text */
+/* Adjust positioning for tooltip positions */
+#top {
+  top: -40px;
+  right: -50%; /* Adjust the right value for Arabic text */
+}
+
+#bottom {
+  top: 25px;
+  right: -50%; /* Adjust the right value for Arabic text */
+}
+
+#left {
+  top: -8px;
+  left: 120%; /* Adjust the left value for Arabic text */
+}
+
+#right {
+  top: -8px;
+  right: 120%; /* Adjust the right value for Arabic text */
+}
