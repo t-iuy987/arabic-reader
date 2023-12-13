@@ -130,4 +130,4 @@ The Reader component is a MERN (MongoDB, Express.js, React, Node.js) application
 ## Additional Information
 - To ensure the full functionality of the application, it's essential to have the dictionary web service running and accessible.
 - Ensure all dependencies are properly set up in each project.
-- For any further questions or support, please contact @tiuy-987.
+- For any further questions or support, please contact [@tiuy-987](https://github.com/tiuy-987).
