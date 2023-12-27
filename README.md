@@ -22,11 +22,11 @@ Arabic Reader consists of two main components: the Spring Boot-based Arabic Dict
 
 
 ### Dictionary (Spring Boot)
-The Dictionary component is a Spring Boot application integrated with Java Server Pages (JSP) and a MySQL database, serving as a root-based Arabic dictionary.
+The Dictionary component is a Spring Boot application integrated with Java Server Pages (JSP) and a SQL database, serving as a root-based Arabic dictionary.
 
 #### Prerequisites
 - Java 20
-- MySQL Database
+- SQL Database
 
 #### Dependencies
 - Spring Boot 3.1.2
@@ -37,7 +37,7 @@ The Dictionary component is a Spring Boot application integrated with Java Serve
 - jaxb-api 2.3.0
 
 #### Backend Configuration (application.properties)
-Ensure your MySQL database is running and configure the `application.properties` file located in `src/main/resources` with the following settings:
+Ensure your SQL database is running and configure the `application.properties` file located in `src/main/resources` with the following settings:
 
 ```properties
 spring.mvc.view.prefix = /WEB-INF/jsp/
@@ -71,7 +71,7 @@ The frontend components are built using JSP, located in the `/WEB-INF/jsp/` dire
 #### Deployment Instructions
 1. Clone the repository locally: `git clone https://github.com/t-iuy987/arabic-reader.git`
 2. Open the Dictionary project in your preferred IDE.
-3. Configure the `application.properties` file with your MySQL credentials.
+3. Configure the `application.properties` file with your SQL credentials.
 4. Build the project using Maven.
 5. Run the Spring Boot application.
 6. Access the dictionary through a web browser at: `http://localhost:9876`
@@ -130,4 +130,4 @@ The Reader component is a MERN (MongoDB, Express.js, React, Node.js) application
 ## Additional Information
 - To ensure the full functionality of the application, it's essential to have the dictionary web service running and accessible.
 - Ensure all dependencies are properly set up in each project.
-- For any further questions or support, please contact @tiuy-987.
+- For any further questions or support, please contact [@tiuy-987](https://github.com/t-iuy987).
