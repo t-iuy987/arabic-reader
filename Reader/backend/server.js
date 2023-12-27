@@ -69,6 +69,25 @@ app.post('/api/saveFavoriteWords', async (req, res) => {
   // Optionally, send a response indicating successful saving of favorite words
   res.status(200).json({ success: true, message: 'Favorite words saved successfully' });
 });
+
+// Backend route to fetch favorite words by book title
+app.post('/api/getFavoriteWordsByTitle', async (req, res) => {
+  const { title } = req.body;
+
+  try {
+    const book = await Book.findOne({ book: title });
+
+    if (book) {
+      res.status(200).json({ success: true, favoriteWords: book.favouriteWords });
+    } else {
+      res.status(404).json({ success: false, message: 'Book not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching favorite words:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch favorite words' });
+  }
+});
+
 const bookRoute = require("./routes/bookRoutes"); 
 const userRoute = require("./routes/userRoutes")
 

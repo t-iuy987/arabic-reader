@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import debounce from "lodash/debounce";
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import TextSelectionMenu from "./TextSelectionMenu";
-import {getWordMeaning, getWordsWithSameRoot} from "../services/wordService.js"
+import { getWordMeaning, getWordsWithSameRoot } from "../services/wordService.js"
 import bookService from '../services/bookService';
 import WordDescriptionSidebar from "./WordDescriptionSidebar";
 import DisplaySameRootedWordsSidebar from './DisplaySameRootedWordsSidebar.jsx';
@@ -14,6 +14,8 @@ import jwtDecode from 'jwt-decode';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import axios from "axios";
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import font from '../fonts/amiri_kh/Amiri-Regular-normal.js'; // The path to your font file
 
@@ -69,7 +71,11 @@ function DisplayBook() {
     margin: "20px auto", // Add margin for better spacing
     padding: "30px", // Increase padding for readability
   });
- 
+
+  window.addEventListener('beforeunload', () => {
+    localStorage.removeItem('favoriteWords');
+  });
+
 
   const changeFontSize = (increase) => {
     setFontSize((prevFontSize) => (increase ? prevFontSize + 2 : prevFontSize - 2));
@@ -122,7 +128,7 @@ function DisplayBook() {
       { page: 3, text: "Sample search result 2" },
     ];
   };
-  const handlerSubmit = () => {};
+  const handlerSubmit = () => { };
   const filepath = `http://localhost:4000/api/bookFiles/${id}`;
   console.log(filepath)
   const docs = [{ uri: filepath }];
@@ -140,10 +146,10 @@ function DisplayBook() {
 
       //setIsMenuVisible(true);
       // Use a small timeout to display the menu
-    const timeout = setTimeout(() => {
-      setIsMenuVisible(true);
-    }, 100); // Adjust the delay as needed
-    
+      const timeout = setTimeout(() => {
+        setIsMenuVisible(true);
+      }, 100); // Adjust the delay as needed
+
     } else {
       setIsMenuVisible(false);
       //window.scrollTo(0, scrollPosition);
@@ -151,9 +157,9 @@ function DisplayBook() {
       if (showMenuTimeout) {
         clearTimeout(showMenuTimeout);
       }
-    } 
+    }
   };
- 
+
   // useEffect(() => {
   //   const handleSelection = () => {
   //     const selection = window.getSelection();
@@ -186,11 +192,11 @@ function DisplayBook() {
     console.log(selectedText);
   }, [selectedText]);
 
-//dictionay sidebar
+  //dictionay sidebar
   const handleCloseSidebar = () => {
     setIsSidebarOpen(false);
   };
-  const openBooksList = () => {};
+  const openBooksList = () => { };
 
   const toggleSidebar = () => {
     setIsSidebarsOpen(!isSidebarsOpen);
@@ -199,34 +205,36 @@ function DisplayBook() {
   const updateBookmarkContent = (content) => {
     setSidebarContent((prevContent) => [...prevContent, content]);
   };
-  
-  const openSearch = () => {};
 
-  const handleAction = async (action) => {
+  const openSearch = () => { };
+
+  const handleAction = async (action, text) => {
+    setSelectedText(text)
+    console.log(text)
     switch (action) {
       case "findRoot":
         // Implementing  findRoot action
         try {
-            console.log("findroot")
-            setSelectedText(window.getSelection().toString());
-            const words = await getWordsWithSameRoot(selectedText);
-            setIsSidebarOpen(true);
-            setIsDisplayingWordsWithSameRoot(true);
-            setWordList(words);
-            console.log('Description:', wordList);
-            console.log(isSidebarOpen);
-            console.log(isDisplayingWordsWithSameRoot);
-  
-          } catch (error) {
-            setDescription("");
-            setIsSidebarOpen(true);
-            setIsDisplayingWordsWithSameRoot(true);
-  
-  
-            console.log("meaning not found")
-            console.error('Error fetching description:', error);
-            action = ""
-          };
+          console.log("findroot")
+          setSelectedText(window.getSelection().toString());
+          const words = await getWordsWithSameRoot(selectedText);
+          setIsSidebarOpen(true);
+          setIsDisplayingWordsWithSameRoot(true);
+          setWordList(words);
+          console.log('Description:', wordList);
+          console.log(isSidebarOpen);
+          console.log(isDisplayingWordsWithSameRoot);
+
+        } catch (error) {
+          setDescription("");
+          setIsSidebarOpen(true);
+          setIsDisplayingWordsWithSameRoot(true);
+
+
+          console.log("meaning not found")
+          console.error('Error fetching description:', error);
+          action = ""
+        };
         break;
       case "fav":
         console.log("Here")
@@ -242,15 +250,15 @@ function DisplayBook() {
         console.log('Data being sent:', { storedFavorites });
 
         axios.post('http://localhost:4000/api/saveFavoriteWords', { newWord, filepath })
-        .then((response) => {
-          // Handle successful sync (optional)
-          console.log(response.data.message);
-        })
-        .catch((error) => {
-          // Handle error (optional)
-          console.error('Error saving favorite words:', error);
-        });
-         break;
+          .then((response) => {
+            // Handle successful sync (optional)
+            console.log(response.data.message);
+          })
+          .catch((error) => {
+            // Handle error (optional)
+            console.error('Error saving favorite words:', error);
+          });
+        break;
       case "describe":
         try {
           setSelectedText(window.getSelection().toString())
@@ -269,17 +277,56 @@ function DisplayBook() {
           action = ""
         }
         break;
-        case "glossary":
-           getWordsWithSameRoot(window.getSelection().toString())
-           .then(words => {
+      case "glossary":
+        getWordsWithSameRoot(window.getSelection().toString())
+          .then(words => {
             downloadPdf(words); // This function needs to be defined to generate and download the PDF
 
-           } )
-           .catch(error => {
+          })
+          .catch(error => {
             console.error('Error fetching words with same root:', error);
           });
 
-          break;
+        break;
+      case "custom_dict":
+        const title = filepath.split('/').pop();
+        console.log("bookname:", title)
+        console.log("custom dict")
+        const encodedTitle = encodeURIComponent(title); // URL encode the title
+        axios.post('http://localhost:4000/api/getFavoriteWordsByTitle', { title })
+          .then((response) => {
+            let favoriteWords = response.data.favoriteWords;
+
+            // Filter out empty strings or null values
+            favoriteWords = favoriteWords.filter(word => word && word.trim().length > 0);
+
+            if (favoriteWords.length === 0) {
+              // If there are no favorite words, display a message to the user
+              alert('There are no favorite words for this book.');
+
+              return;
+            } 
+              // Generate PDF with favorite words
+              const pdf = new jsPDF();
+              pdf.addFileToVFS('Amiri-Regular-normal.ttf', font);
+              pdf.addFont('Amiri-Regular-normal.ttf', 'Amiri-Regular', 'normal');
+              pdf.setFont('Amiri-Regular', 'normal');
+
+              pdf.setFontSize(12);
+              pdf.text('Favorite Words', 10, 10);
+              favoriteWords.forEach((word, index) => {
+                pdf.text(`${index + 1}. ${word}`, 10, (index + 1) * 10 + 20);
+              });
+
+              // Download PDF
+              pdf.save(`${title}-favorite-words.pdf`);
+            
+          })
+          .catch((error) => {
+            console.error('Error getting favorite words:', error);
+          });
+
+        break;
 
       default:
         break;
@@ -319,8 +366,8 @@ function DisplayBook() {
           data.cell.styles.font = 'Amiri-Regular';
         }
       },
-    });    doc.text(`Glossary ${new Date().getTime()}`, 14, 15);
-   // doc.text('سلام', 10, 10);
+    }); doc.text(`Glossary ${new Date().getTime()}`, 14, 15);
+    // doc.text('سلام', 10, 10);
     doc.save(`glossary_${new Date().getTime()}.pdf`);
   };
 
@@ -366,16 +413,16 @@ function DisplayBook() {
         onSearch={handleSearch}
       />
 
-<div className="displayBook ">
+      <div className="displayBook ">
         <div className="displayBookContent" >
-          <div 
-         // onMouseUp={handleMouseUp}
-        //  ref={containerRef}
-          style={{ fontSize: `${fontSize}px` }}>
+          <div
+            // onMouseUp={handleMouseUp}
+            //  ref={containerRef}
+            style={{ fontSize: `${fontSize}px` }}>
 
             <DocViewer
               documents={[{ uri: `http://localhost:4000/api/bookFiles/${id}` }]}
-            // pluginRenderers={DocViewerRenderers}
+              // pluginRenderers={DocViewerRenderers}
               // config={{
               //   header: {
               //     disableHeader: false,
@@ -385,8 +432,20 @@ function DisplayBook() {
               // }}
               style={styles}
             />
-           <TextSelector style={{position: "absolute", transform:"translate3d(-12px,0px, 0px, 0px)"}}
-        events={[
+            <TextSelectionMenu onAction={handleAction} />
+            {/* <TextSelector 
+            style={{
+              maxWidth: "100%", // Adjust to fit content, possibly using 'vw' for responsive width
+              overflow: "auto", // To allow scrolling within the component if necessary
+              position: "absolute",
+              // Calculate 'left' position to center it based on the selection (you'll need JS for this)
+              left: "50%", // Starting point for centering
+              transform: "translateX(-50%)", // Adjusts the element to be truly centered
+              display: "flex",
+              flexDirection: "column", // Stack options vertically
+              gap: "8px", // Space between options
+            }}        
+            events={[
           {
             text: "Similar Words",
             handler: () => handleAction("findRoot")//() => {console.log(window.getSelection().toString())}
@@ -412,13 +471,10 @@ function DisplayBook() {
             handler: () => handleAction("describe")
           }
         ]}
-        //color={"yellow"}
-        //colorText={true}
       >
-      
-      </TextSelector>
+      </TextSelector> */}
 
-             {/* {isMenuVisible && <TextSelectionMenu
+            {/* {isMenuVisible && <TextSelectionMenu
            // show={isMenuVisible}
             position={menuPosition}
             //onCopy={() => handleAction('copy')}
@@ -428,15 +484,15 @@ function DisplayBook() {
           /> 
             }  */}
 
-        </div>
-        {isSidebarOpen && (<WordDescriptionSidebar wordDetails={description} onClose={handleCloseSidebar} />)}
-        {isSidebarOpen && isDisplayingWordsWithSameRoot && (
-          <>
-        <DisplaySameRootedWordsSidebar wordDetail={wordList} onClose={handleCloseSidebar} />
-        
-        </>  
-        )}
-        {/* 
+          </div>
+          {isSidebarOpen && (<WordDescriptionSidebar wordDetails={description} onClose={handleCloseSidebar} />)}
+          {isSidebarOpen && isDisplayingWordsWithSameRoot && (
+            <>
+              <DisplaySameRootedWordsSidebar wordDetail={wordList} onClose={handleCloseSidebar} />
+
+            </>
+          )}
+          {/* 
         {showActions && (
           <div className="actions">
             <div className="word-options" style={{ top: position.y, left: position.x }}>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SideBars from "./SideBars";
 import { RiArrowDownSLine } from "react-icons/ri";
+import { BiBook } from "react-icons/bi"; // Import the book icon
 
 export default function Appbar({
   openBooksList,
@@ -47,6 +48,9 @@ export default function Appbar({
   };
   const handleSearch = () => {
     onSearch(searchText);
+  };
+  const handleCustomDictionary = () => {
+    // Future implementation
   };
 
   const getButtonName = (buttonName) => {
@@ -357,6 +361,47 @@ export default function Appbar({
           </div>
         )}
       </button>
+
+      <span
+  style={{
+    height: "inherit",
+    backgroundColor: "gray",
+    border: "0.1px solid #d3d3d3",
+    margin: "0px",
+  }}
+></span>
+
+<button
+  className="btn btn-link"
+  onClick={handleCustomDictionary}
+  onMouseOver={() => handleHover("customDictionary")}
+  onMouseLeave={handleMouseLeave}
+  style={{ color: "black" }}
+>
+  <BiBook style={{ fontSize: '20px' }} />
+  {hoveredButton === "customDictionary" && (
+    <div
+      className="popup"
+      style={{
+        position: "absolute",
+        top: "42px",
+        // Adjust the position as needed
+        right: "31%",
+        border: "2px solid #202123",
+        backgroundColor: "#202123",
+        color: "white",
+        fontSize: "13px",
+        padding: "8px",
+        fontWeight: "500",
+      }}
+    >
+      Custom Dictionary
+    </div>
+  )}
+</button>
+
+
+
       <span
         style={{
           height: "inherit",
@@ -365,6 +410,12 @@ export default function Appbar({
           margin: "0px",
         }}
       ></span>
+
+
+
+
+
+
       <button
         className="btn btn-link"
         onClick={toggleSearchInput}
@@ -392,6 +443,11 @@ export default function Appbar({
           </div>
         )}
       </button>
+
+
+
+
+
 
       <span
         style={{

@@ -14,7 +14,7 @@ public class LoginController {
     @PostMapping("/admin_login")
     public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password) {
         if (username.equals(adminUsername) && password.equals(adminPassword)) {
-            return new ModelAndView("redirect:/dashboard_admin"); // Return a success message or token
+            return new ModelAndView("redirect:/words/displayall"); // Return a success message or token
         } else {
             return new ModelAndView("redirect:/loginpage?error"); //  incorrect credentials
         }

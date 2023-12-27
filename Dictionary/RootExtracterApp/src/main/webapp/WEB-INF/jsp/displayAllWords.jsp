@@ -33,8 +33,10 @@ font-family: 'Prata', serif;
 </head>
 <body>
     <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center">
         <h2>All Words</h2>
-        <table class="table">
+        <a href="/words/addWord" class="btn btn-primary mb-3">Add Words</a>
+    </div>        <table class="table">
             <thead>
                 <tr>
                     <th>Word</th>

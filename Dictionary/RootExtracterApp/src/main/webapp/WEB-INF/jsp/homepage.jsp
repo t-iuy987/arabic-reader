@@ -10,9 +10,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Prata&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
     <!-- Custom CSS -->
     <style>
-        /* Define your custom styles here */
+        /*  custom styles  */
         body {
             background-color: #f8f7f9;
             color: #000000;
@@ -79,7 +81,7 @@ font-family: 'Prata', serif;
         }
 
         .footer a {
-            color: #000000;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -124,6 +126,12 @@ font-family: 'Prata', serif;
                     <p>Every Arabic word has a root that carries its essence. Knowing the root of a word can help you
                         understand its meaning and usage in a deeper way. Our microservice is here to assist you in
                         identifying these roots effortlessly.</p>
+                    <h2 class="mb-3">Empowering Communication</h2>
+                    <p>By breaking down the barriers between a user and understanding, our service is more than a dictionary—it's a companion in the journey of language acquisition. Whether it's for a student grappling with new vocabulary, a teacher crafting a lesson, or a writer seeking the perfect expression, our microservice brings the power of Arabic roots to their fingertips.</p>
+                    <h2 class="mb-3">A World of Words</h2>
+                    <p>Explore. Discover. Learn. Our microservice is a portal to a world where every word tells a story, every root has a journey, and every user has a path to follow. Join us on a voyage into the heart of Arabic—a language that has whispered, sung, and spoken through time.</p>
+                
+                
                 </div>
                 <div class="col-lg-6">
                 <img src="${pageContext.servletContext.contextPath}/images/roots.png" class="img-fluid" alt="">
@@ -143,7 +151,9 @@ font-family: 'Prata', serif;
 
     <!-- Footer Section -->
     <footer class="footer">
+
         <div class="container text-center">
+        
             <a href="#" class="mr-3"><i class="fab fa-instagram"></i></a>
             <a href="#" class="mr-3"><i class="fab fa-linkedin"></i></a>
             <a href="#" class="mr-3"><i class="fab fa-github"></i></a>

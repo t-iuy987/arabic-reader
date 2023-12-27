@@ -114,10 +114,10 @@ public class WordController {
 								            @RequestParam("definition") String definition,
 								            @RequestParam(value = "root", required = false) String root,
 								            @RequestParam(value = "partsOfSpeech", required = false) List<String> partsOfSpeech,
-								            @RequestParam(value = "idiomatic", defaultValue = "false") boolean idiomatic) {
+								            @RequestParam(value = "idiomatic", defaultValue = "false") boolean idiomatic,
+								            RedirectAttributes redirectAttributes) {
         try {
-            return ResponseEntity.ok(wordService.addWord(word, definition, root, partsOfSpeech, idiomatic));
-        }
+        	return ResponseEntity.ok(wordService.addWord(word, definition, root, partsOfSpeech, idiomatic));             }
         catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding word.");
 

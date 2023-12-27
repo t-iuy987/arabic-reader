@@ -24,12 +24,12 @@ export const SidebarData = [
     //     path: "/",
     //     cName: "side-text"
     // },
-    {
-        title: "Bookmarks",
-        icon: <BookmarkBorderIcon/>,
-        path: "/",
-        cName: "side-text"
-    },
+    // {
+    //     title: "Bookmarks",
+    //     icon: <BookmarkBorderIcon/>,
+    //     path: "/",
+    //     cName: "side-text"
+    // },
     {
         title: "Logout",
         icon: <LogoutIcon/>,

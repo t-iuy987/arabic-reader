@@ -3,9 +3,14 @@ import "../styles/wordDescriptionSidebar.css";
 
 const DisplaySameRootedWordsSidebar = ({ wordDetail, onClose }) => {
   const isWordNotFound = !wordDetail;
+  const sidebarStyles = {
+    height: '100%', /* Set a height */
+    overflowY: 'auto', /* Enable vertical scrolling */
+    /* Add more styles here as needed */
+  };
 
   return (
-    <div className={`wsidebar ${isWordNotFound ? 'not-found' : ''}`}>
+    <div style={sidebarStyles} className={`wsidebar ${isWordNotFound ? 'not-found' : ''}`}>
       <button className="close-button" onClick={onClose}>
         X
       </button>

@@ -30,7 +30,6 @@ export default function UserHome({ userData }) {
                 Discover the meanings of Arabic words.
               </Card.Text>
               <Link to="/meanings">
-                <Button variant="primary">Go</Button>
               </Link>
             </Card.Body>
           </Card>
@@ -41,7 +40,6 @@ export default function UserHome({ userData }) {
                 Investigate the roots of Arabic words.
               </Card.Text>
               <Link to="/roots">
-                <Button variant="primary">Go</Button>
               </Link>
             </Card.Body>
           </Card>
@@ -52,7 +50,6 @@ export default function UserHome({ userData }) {
                 Understand the part-of-speech tags.
               </Card.Text>
               <Link to="/pos-tags">
-                <Button variant="primary">Go</Button>
               </Link>
             </Card.Body>
           </Card>
@@ -66,7 +63,6 @@ export default function UserHome({ userData }) {
                 Build your personal glossary.
               </Card.Text>
               <Link to="/create-glossary">
-                <Button variant="primary">Go</Button>
               </Link>
             </Card.Body>
           </Card>
@@ -77,7 +73,6 @@ export default function UserHome({ userData }) {
                 Create a custom dictionary.
               </Card.Text>
               <Link to="/custom-dictionary">
-                <Button variant="primary">Go</Button>
               </Link>
             </Card.Body>
           </Card>

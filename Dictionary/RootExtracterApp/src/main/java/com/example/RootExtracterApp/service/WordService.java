@@ -139,17 +139,11 @@ public class WordService {
 		            return "Word already exists.";
 		        }
 
-				
-
-				wordRepository.save(newWord);
-				return "Word added successfully.";
-
-			}
-			// if English characters are detected
-			return "English characters are not allowed in word and definition fields.";
-
 			
-			 
+				wordRepository.save(newWord);
+				return "Word added successfully.";			}
+			// if English characters are detected
+			return "English characters are not allowed in word and definition fields.";		 
 
 		} catch (Exception e) {
 			return "Error adding word.";
